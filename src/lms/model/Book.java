@@ -1,23 +1,23 @@
 package lms.model;
 
 public class Book extends LibraryItem {
-    private int pageCount;
+    private String author;
 
-    public Book(String itemID, String title, String author, int pageCount) {
-        super(itemID, title, author);
-        this.pageCount = pageCount;
+
+    public Book(String id, String title, String author) {
+        super(id, title);
+        setAuthor(author);
     }
 
-    public int getPageCount() {
-        return pageCount;
+
+    public String getAuthor() {
+        return author;
     }
 
-    public void setPageCount(int pageCount) {
-        this.pageCount = pageCount;
-    }
-
-    @Override
-    public void displayDetails() {
-        System.out.println("Book [ID: " + getItemID() + ", Title: " + getTitle() + ", Author: " + getAuthor() + ", Pages: " + pageCount + ", Available: " + isAvailable() + "]");
+    public void setAuthor(String author) {
+        if (author == null || author.trim().isEmpty()) {
+            throw new IllegalArgumentException("Author cannot be null or empty");
+        }
+        this.author = author;
     }
 }
