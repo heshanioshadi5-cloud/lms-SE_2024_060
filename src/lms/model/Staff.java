@@ -1,23 +1,10 @@
 package lms.model;
 
 public class Staff extends Member {
-    private String department;
+    private static final int STAFF_BORROW_LIMIT = 10;
 
-    public Staff(String memberID, String name, String department) {
-        super(memberID, name);
-        this.department = department;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    @Override
-    public void displayMemberDetails() {
-        System.out.println("Staff [ID: " + getMemberID() + ", Name: " + getName() + ", Department: " + department + "]");
+   
+    public Staff(String memberId, String name) {
+        super(memberId, name, STAFF_BORROW_LIMIT);
     }
 }

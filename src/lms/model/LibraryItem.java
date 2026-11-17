@@ -1,24 +1,26 @@
 package lms.model;
 
-public abstract class LibraryItem {
-    private String itemID;
+public class LibraryItem {
+    private String id;
     private String title;
-    private String author;
-    private boolean isAvailable;
+    private boolean isBorrowed;
 
-    public LibraryItem(String itemID, String title, String author) {
-        this.itemID = itemID;
-        this.title = title;
-        this.author = author;
-        this.isAvailable = true;
+    public LibraryItem(String id, String title) {
+        setId(id);
+        setTitle(title);
+        this.isBorrowed = false;
     }
 
-    public String getItemID() {
-        return itemID;
+
+    public String getId() {
+        return id;
     }
 
-    public void setItemID(String itemID) {
-        this.itemID = itemID;
+    public void setId(String id) {
+        if (id == null || id.trim().isEmpty()) {
+            throw new IllegalArgumentException("ID cannot be null or empty");
+        }
+        this.id = id;
     }
 
     public String getTitle() {
@@ -26,24 +28,28 @@ public abstract class LibraryItem {
     }
 
     public void setTitle(String title) {
+        if (title == null || title.trim().isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be null or empty");
+        }
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public boolean isBorrowed() {
+        return isBorrowed;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setBorrowed(boolean borrowed) {
+        isBorrowed = borrowed;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
+
+    public double calculateLateFee(int daysLate) {
+        return daysLate * 10.0;
     }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
 
-    public abstract void displayDetails();
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "{id='" + id + "', title='" + title + "', borrowed=" + isBorrowed + "}";
+    }
 }
