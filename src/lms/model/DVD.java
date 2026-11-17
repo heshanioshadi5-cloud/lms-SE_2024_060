@@ -1,23 +1,29 @@
 package lms.model;
 
 public class DVD extends LibraryItem {
-    private double duration;
+    private int durationMinutes;
 
-    public DVD(String itemID, String title, String author, double duration) {
-        super(itemID, title, author);
-        this.duration = duration;
+
+    public DVD(String id, String title, int durationMinutes) {
+        super(id, title);
+        setDurationMinutes(durationMinutes);
     }
 
-    public double getDuration() {
-        return duration;
+
+    public int getDurationMinutes() {
+        return durationMinutes;
     }
 
-    public void setDuration(double duration) {
-        this.duration = duration;
+    public void setDurationMinutes(int durationMinutes) {
+        if (durationMinutes <= 0) {
+            throw new IllegalArgumentException("Duration must be greater than zero");
+        }
+        this.durationMinutes = durationMinutes;
     }
+
 
     @Override
-    public void displayDetails() {
-        System.out.println("DVD [ID: " + getItemID() + ", Title: " + getTitle() + ", Author: " + getAuthor() + ", Duration: " + duration + " hrs, Available: " + isAvailable() + "]");
+    public double calculateLateFee(int daysLate) {
+        return daysLate * 25.0;
     }
 }
